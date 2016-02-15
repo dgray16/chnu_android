@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/task"
+            android:id="@+id/textView"/>
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="215dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/currency1"
+                android:id="@+id/textView2" android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" android:paddingTop="5dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/currency1Value"
+                android:text="Enter value" android:layout_below="@+id/textView2" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" android:paddingTop="20dp"/>
+        <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/currency1Spinner"
+                android:layout_toRightOf="@+id/currency1Value"
+                android:layout_toEndOf="@+id/currency1Value" android:layout_alignBottom="@+id/currency1Value"
+                android:layout_alignTop="@+id/currency1Value" android:paddingTop="20dp"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="152dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceSmall" android:text="@string/currency2"
+                  android:id="@+id/textView3" android:layout_alignParentTop="true"
+                  android:layout_centerHorizontal="true" android:paddingTop="5dp"/>
+        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:inputType="numberDecimal"
+                  android:ems="10" android:id="@+id/currency2Value"
+                  android:paddingTop="20dp" android:layout_below="@+id/textView3" android:layout_alignParentLeft="true"
+                  android:layout_alignParentStart="true" android:enabled="false"/>
+        <Spinner android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/currency2Spinner"
+                 android:layout_toEndOf="@+id/textView3"
+                 android:paddingTop="20dp" android:layout_toRightOf="@+id/textView3"
+                 android:layout_alignTop="@+id/currency2Value"/>
+    </RelativeLayout>
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Convert"
+            android:id="@+id/convertButton" android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" android:layout_gravity="center_horizontal"/>
+</LinearLayout>
