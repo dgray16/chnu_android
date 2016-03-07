@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">browser-lab2</string>
+
+    <string name="action_browser">Browser</string>
+    <string name="action_backward">Back</string>
+    <string name="action_forward">Forward</string>
+    <string name="action_bookmarks">Bookmarks</string>
+    <string name="action_history">History</string>
+
+    <string name="navigation_drawer_open">Open drawer</string>
+    <string name="navigation_drawer_close">Close drawer</string>
+    <string name="action_settings">Settings</string>
+</resources>

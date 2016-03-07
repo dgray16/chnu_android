@@ -1,11 +1,30 @@
 package com.university.androiduniversity.app_lab1;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 
 
 public class MainActivity extends Activity {
@@ -38,9 +57,24 @@ public class MainActivity extends Activity {
         converButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( currency1Spinner.getSelectedItem() != currency2Spinner.getSelectedItem() ){
-                    // TODO get from internet?
-                } else Toast.makeText(getApplicationContext(), "Error: same currencies", Toast.LENGTH_SHORT).show();
+                if ( currency1Value.getText().toString().matches("^[0-9]*$") ){
+                    if ( isNetworkAvailable() ){
+                        if ( currency1Spinner.getSelectedItem() != currency2Spinner.getSelectedItem() ) {
+                            String currencyFrom = currency1Spinner.getSelectedItem().toString();
+                            String currencyTo = currency2Spinner.getSelectedItem().toString();
+
+                            Float valueFrom = Float.parseFloat(currency1Value.getText().toString());
+
+                            Float rate = getCurrentRateForCurrencies(currencyFrom, currencyTo, valueFrom);
+                            currency2Value.setText(rate.toString());
+
+                        } else Toast.makeText(getApplicationContext(), "Error: same currencies", Toast.LENGTH_SHORT)
+                                .show();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Error: no Internet connection", Toast.LENGTH_SHORT)
+                                .show();
+                } else Toast.makeText(getApplicationContext(), "Error: not valid number", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -52,7 +86,34 @@ public class MainActivity extends Activity {
 
         currency1Spinner.setAdapter(adapter);
         currency2Spinner.setAdapter(adapter);
+        currency2Spinner.setSelection(1);
     }
 
+    private Float getCurrentRateForCurrencies(String from, String to, Float howMuch){
+        String result = "";
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
 
+            // TODO better to use AsyncTask
+
+            String query = "https://www.google.com.ua/search?q=" + howMuch.intValue() + "+" + from + "+to+" + to;
+            Document doc = Jsoup.connect(query).get();
+            Elements values = doc.getElementsByClass("vk_ans");
+            Element value = values.get(0);
+            String[] resultValues = value.text().split(" ");
+            result = resultValues[0].replaceAll("\\s+", "");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Float.parseFloat(result);
+
+    }
+
+    private boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }
