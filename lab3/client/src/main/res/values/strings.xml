@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android-vk</string>
+    <string name="app_name">VK-client</string>
 
     <string name="title_section1">Messages</string>
     <string name="title_section2">Submit post</string>
