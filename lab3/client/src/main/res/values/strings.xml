@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">android-vk</string>
+
+    <string name="title_section1">Messages</string>
+    <string name="title_section2">Submit post</string>
+    <string name="title_section3">Photos</string>
+    <string name="title_section4">Videos</string>
+    <string name="title_section5">Audios</string>
+    <string name="title_section6">Edit personal info</string>
+    <string name="title_section7">Change profile photo</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
